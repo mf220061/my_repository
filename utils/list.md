@@ -16,5 +16,8 @@ aliasを設定するかPathの通った場所に設置することでtmux使用�
 プラグインを用いないfish shellの見た目の改善。一部自分で変更している<br>
 参考URL: https://original-game.com/how-to-use-fishshell/
 
-### etc（追加予定）
+### 追加予定
 * nvim
+
+### etc
+特になし
