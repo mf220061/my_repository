@@ -14,7 +14,9 @@ aliasを設定するかPathの通った場所に設置することでtmux使用�
 * fish_prompt.fish
 * mytheme_colors.fish<br>
 プラグインを用いないfish shellの見た目の改善。一部自分で変更している<br>
-参考URL: https://original-game.com/how-to-use-fishshell/
+参考URL: https://original-game.com/how-to-use-fishshell/<br>
+フォントの反映方法。Ubuntuでは少し特殊な方法が必要みたい<br>
+参考URL: https://zenn.dev/miwarin/articles/bbf92115d99faeab9734
 
 ### 追加予定
 * nvim
