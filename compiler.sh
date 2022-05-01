@@ -23,9 +23,19 @@ compile_latex () {
     docker cp ./ latex_:/root/result
     				# 作業用ディレクトリの中身をコンテナにコピーする
 
-    docker exec latex_ platex hoge
-    docker exec latex_ dvipdfmx hoge
-    				# コンパイルを行う
+
+    if [ "$2" = 'platex' ]; then
+        docker exec latex_ platex hoge
+        docker exec latex_ dvipdfmx hoge
+
+    elif [ "$2" = 'lualatex' ]; then
+        docker exec latex_ lualatex hoge
+
+    else
+        docker exec latex_ platex hoge
+        docker exec latex_ dvipdfmx hoge
+
+    fi 				# コンパイルを行う
 				# できればここはオプションで選択できるようにしたい
 
     docker cp latex_:/root/result/ ./
@@ -41,13 +51,20 @@ compile_latex () {
     rm -r $WORKDIR		# 作業用ディレクトリを削除する
 }
 
-if [ $# -lt 1 ]; then		# 引数が指定されていない場合は適当なtexファイルを探してコンパイルする
-    TARGET=$(find . -name \*.tex)
-    compile_latex $TARGET
+CMDNAME=`basename $0`
 
-else				# 引数を複数指定することもできる
-    for TARGET in $@
-    do
-        compile_latex $TARGET
-    done
-fi
+while getopts c:f: OPT
+do
+    case $OPT in
+        "c" ) FLG_C="TRUE" ; VALUE_C="$OPTARG" ;;
+        "f" ) FLG_F="TRUE" ; VALUE_F="$OPTARG" ;;
+          * ) echo "Usage: $CMDNAME [-c VALUE] [-f VALUE]" 1>&2
+	    exit 1 ;;
+    esac
+done
+
+shift $(expr $OPTIND - 1)
+
+compile_latex $VALUE_F $VALUE_C
+
+exit 0
