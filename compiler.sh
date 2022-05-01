@@ -1,7 +1,7 @@
 #!/bin/bash
 
 DIR=$(pwd)
-WORK_DIR=/home/koda/study/docker/latex/compiler/two
+WORK_DIR=/home/koda/study/docker/latex/compiler/github/my_repository_sub
 
 compile_latex () {
     TEX=$1
