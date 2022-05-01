@@ -1,45 +1,51 @@
 #!/bin/bash
 
-DIR=$(pwd)
-WORK_DIR=/home/koda/study/docker/latex/compiler/github/my_repository_sub
+DIR=$(pwd)			# 現在のディレクトリ
+WORKDIR=$DIR/._latex		# 現在のディレクトリの下に作業用ディレクトリを作成
+if [ -e $WORKDIR ]; then	# 事前にディレクトリがあった場合は消すか確認したほうがいいかも
+    rm -ri $WORKDIR
+fi
+mkdir $WORKDIR
 
 compile_latex () {
     TEX=$1
-    NAME_TEX=${TEX##*/}
-    NAME=${NAME_TEX%.*}
+    NAME_TEX=${TEX##*/}		# 別のディレクトリから指定している場合名前に'/'が入っているので、それをもとにファイル名だけにする
+    NAME=${NAME_TEX%.*}		# .texを削除する。これはPDFを同じ名前にするため
 
-    cp ./$NAME_TEX $WORK_DIR/files/hoge.tex
-    if [ -e ./figures ]; then
-	# 前回のコンパイル時のデータが残っている場合消す
-        if [ -e $WORK_DIR/files/figures ]; then
-            rm -r $WORK_DIR/files/figures
-	fi
-        cp -r ./figures $WORK_DIR/files/figures
-    fi
+    cp $NAME_TEX $WORKDIR/hoge.tex
+    cd $WORKDIR
 
-    if [ -e ./sources ]; then
-	# 前回のコンパイル時のデータが残っている場合消す
-        if [ -e $WORK_DIR/files/sources ]; then
-            rm -r $WORK_DIR/files/sources
-	fi
-        cp -r ./sources $WORK_DIR/files/sources
-    fi
+    				# Dockerコンテナを用いてコンパイルを行う
 
-    cd $WORK_DIR/files
     docker run -itd --name latex_ mf220061/my_repository:latexv1.1
-    docker cp ./ latex_:/root/result
-    docker exec latex_ platex hoge && dvipdfmx hoge
-    docker cp latex_:/root/result/ ./
-    docker rm -f latex_
+    				# Dockerコンテナを作成する
 
+    docker cp ./ latex_:/root/result
+    				# 作業用ディレクトリの中身をコンテナにコピーする
+
+    docker exec latex_ platex hoge
+    docker exec latex_ dvipdfmx hoge
+    				# コンパイルを行う
+				# できればここはオプションで選択できるようにしたい
+
+    docker cp latex_:/root/result/ ./
+    				# コンパイル結果を作業用ディレクトリにコピーする
+
+    docker rm -f latex_		# コンテナを削除する
+    
     cd $DIR
-    cp $WORK_DIR/result/hoge.pdf ./$NAME.pdf
+    cp -i $WORKDIR/result/hoge.pdf $DIR/$NAME.pdf
+    				# 作業用ディレクトリから現在のディレクトリにPDFファイルをコピーする
+				# 上書きされるので注意
+				# 確認を取るようにする
+    rm -r $WORKDIR		# 作業用ディレクトリを削除する
 }
 
-if [ $# -lt 1 ]; then
+if [ $# -lt 1 ]; then		# 引数が指定されていない場合は適当なtexファイルを探してコンパイルする
     TARGET=$(find . -name \*.tex)
     compile_latex $TARGET
-else
+
+else				# 引数を複数指定することもできる
     for TARGET in $@
     do
         compile_latex $TARGET
