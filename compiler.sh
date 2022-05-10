@@ -13,6 +13,7 @@ compile_latex () {
     NAME=${NAME_TEX%.*}		# .texを削除する。これはPDFを同じ名前にするため
 
     cp $NAME_TEX $WORKDIR/hoge.tex
+    cp -r $DIR/sources $WORKDIR/sources
     cd $WORKDIR
 
     				# Dockerコンテナを用いてコンパイルを行う
