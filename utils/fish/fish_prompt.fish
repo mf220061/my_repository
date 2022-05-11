@@ -31,7 +31,7 @@ function _prompt_dir
     # 〜ここまでを追加〜
  
     printf ' %s ' (prompt_pwd)
-    _segment $color_user $color_dark
+    _segment $color_user $black
 end
  
 function _prompt_user
@@ -80,7 +80,7 @@ function fish_prompt
  
     set -l last_status $status
  
-    set_color -b $color_dark $white
+    set_color -b $black $white
  
     if [ $last_status -gt 0 ]
         echo -n (set_color $white)" $icon_miss "
