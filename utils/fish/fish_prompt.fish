@@ -83,7 +83,7 @@ function _prompt_git
 	set -l git_status_symbol (_git_status_symbol)                                       # 追加
 	_change_color_git_status_bar
 	set_color -b $color_git_status_bar
-	printf '%s ' (set_color $black)"$icon_git_symbol $git_branch $git_status_symbol"    # 変更
+	printf '%s' (set_color $black)"$icon_git_symbol $git_branch $git_status_symbol"    # 変更
 	_segment normal $color_git_status_bar
     end
 end
