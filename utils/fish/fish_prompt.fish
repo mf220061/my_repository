@@ -32,14 +32,14 @@ end
  
 function _segment2
     set_color -b $argv[1] $argv[2]
-    echo -n " $segment_separator2"
+    echo -n "$segment_separator2"
 end
 
 function _prompt_dir
  
     # 〜ここから〜
-    if [ $HOME = $PWD ]; printf ' %s ' $icon_home
-    else; printf ' %s ' $icon_folder; end
+    if [ $HOME = $PWD ]; printf '%s ' $icon_home
+    else; printf '%s ' $icon_folder; end
     # 〜ここまでを追加〜
  
     printf ' %s ' (prompt_pwd)
@@ -119,5 +119,5 @@ function fish_prompt
     _prompt_git
 
     # 適当に追加した
-    printf '\n %s%s%s ' $prompt_icon $prompt_icon $prompt_icon
+    printf '\n%s%s%s ' $prompt_icon $prompt_icon $prompt_icon
 end
