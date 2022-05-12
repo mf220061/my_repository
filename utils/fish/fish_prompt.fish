@@ -103,7 +103,7 @@ function fish_prompt
     set_color -b $black $white
  
     if [ $last_status -gt 0 ]
-	echo -n (set_color $white)" $icon_miss "
+	echo -n (set_color $white)"$icon_miss "
 	set color_user $color_warning
     else
 	set color_user $color_main
