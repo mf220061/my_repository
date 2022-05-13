@@ -4,6 +4,7 @@ set -l icon_cross                   \uf00d
 set -l icon_plus                    \uf067  # 追加
 set -l icon_three_point_reader      \uf6d7  # 追加
 set -l icon_octocat                 \uf113  # 追加
+set -l icon_python                  \ue235
  
 set -l separator_triangle2          \ue0b2
 #set -l dainari                      \u276f
@@ -24,6 +25,7 @@ set color_git_status_bar
  
 set segment_separator2              $separator_triangle2        # 追加
 set prompt_icon                     $dainari                    # 追加
+set icon_venv                       $icon_python
 
 function _segment
     set_color -b $argv[1] $argv[2]
@@ -92,7 +94,8 @@ function _prompt_venv
     #echo -n -s (set_color -b white) (basename "$VIRTUAL_ENV") (set_color normal) _segment
     _segment2 normal green
     set_color -b green $white 
-    printf ' %s ' (basename "$VIRTUAL_ENV")
+    printf ' %s ' $icon_venv
+    printf '%s ' (basename "$VIRTUAL_ENV")
     _segment normal green
 end
  
