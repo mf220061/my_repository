@@ -8,3 +8,6 @@ cp ./fish/fish_prompt.fish ~/.config/fish/functions/fish_prompt.fish
 
 mkdir -p ~/.config/fish/
 cp ./fish/config.fish ~/.config/fish/config.fish
+
+mkdir -p ~/.config/nvim/
+cp ./nvim/init.vim ~/.config/nvim/init.vim
