@@ -19,5 +19,8 @@ cp ./nvim/init.vim ~/.config/nvim/init.vim
 # --- tmux ------
 mkdir -p ~/bin/
 cp ./tmux/ide.sh ~/bin/ide.sh
-echo PATH="$PATH:~/bin"
+echo PATH="$PATH:~/bin" >> ~/.bashrc
+source ~/.bashrc
+
+cp ./tmux/.tmux.conf ~/.tmux.conf
 # --- tmux ------
