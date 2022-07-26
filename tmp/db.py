@@ -40,10 +40,10 @@ def check_conflict(schedule):
 # 競合の確認
 # ここを修正するべきかも
 def check(a, b):
-    if a.sousa == b.sousa == 'r':
+    if a.sousa == 'r' and b.sousa == 'r':
         return False
     if a.data != b.data:
-        if a.transaction == b.transaction:
+        if a.sousa != b.sousa and a.transaction == b.transaction:
             return True
         return False
     return True
@@ -145,9 +145,9 @@ S3 = [
     ]
 
 S4 = [
-        Sousa("r", "t", "x", 0),
-        Sousa("r", "u", "x", 1),
-        Sousa("w", "u", "x", 2)
+        Sousa("r", "u", "x", 0),
+        Sousa("w", "t", "y", 1),
+        Sousa("w", "u", "y", 2)
     ]
 
 S5 = [
@@ -157,7 +157,7 @@ S5 = [
         Sousa("r", "t", "y", 3),
         Sousa("r", "s", "z", 4),
         Sousa("w", "t", "y", 5),
-        Sousa("w", "s", "z", 8),
+        Sousa("w", "s", "z", 6),
         Sousa("r", "u", "z", 7),
         Sousa("w", "t", "z", 8),
         Sousa("w", "u", "x", 9)
@@ -169,8 +169,8 @@ for s in check_conflict(S2):
 #print_schedule(S2)
 #print_schedule(make_goal(S2))
 
-solve(S1)
-solve(S2)
-solve(S3)
+#solve(S1)
+#solve(S2)
+#solve(S3)
 solve(S4)
 solve(S5)
