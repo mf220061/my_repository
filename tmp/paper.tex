@@ -1,0 +1,178 @@
+\documentclass[a4paper]{jarticle}
+\usepackage[dvipdfmx]{graphicx}
+
+\usepackage[deluxe]{otf}
+\usepackage{amsfonts,latexsym}
+\usepackage{ulem}
+\usepackage{fancybox}
+\usepackage{float}
+\usepackage{bm}
+\usepackage{type1cm}
+
+% ---===---===---===---
+\usepackage{listings,jvlisting}
+\usepackage[dvipdfmx]{xcolor}
+
+\newcommand\YAMLcolonstyle{\color{red}\mdseries}
+\newcommand\YAMLkeystyle{\color{black}\bfseries}
+\newcommand\YAMLvaluestyle{\color{blue}\mdseries}
+
+\makeatletter
+\renewcommand{\lstlistingname}{ソースコード}
+
+% here is a macro expanding to the name of the language
+% (handy if you decide to change it further down the road)
+\newcommand\language@yaml{yaml}
+
+\expandafter\expandafter\expandafter\lstdefinelanguage
+\expandafter{\language@yaml}
+{
+  keywords={true,false,null,y,n},
+  keywordstyle=\color{darkgray}\ttfamily,
+  basicstyle=\YAMLkeystyle\ttfamily,                                 % assuming a key comes first
+  sensitive=false,
+  comment=[l]{\#},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\YAMLvaluestyle\ttfamily,
+  moredelim=[l][\color{orange}]{\&},
+  moredelim=[l][\color{magenta}]{*},
+  moredelim=**[il][\YAMLcolonstyle{:}\YAMLvaluestyle]{:},   % switch to value style at :
+  morestring=[b]',
+  morestring=[b]",
+  literate =    {---}{{\ProcessThreeDashes}}3
+                {>}{{\textcolor{red}\textgreater}}1     
+                {|}{{\textcolor{red}\textbar}}1 
+                {\ -\ }{{\mdseries\ -\ }}3,
+}
+
+% switch to key style at EOL
+\lst@AddToHook{EveryLine}{\ifx\lst@language\language@yaml\YAMLkeystyle\fi}
+\makeatother
+
+\newcommand\ProcessThreeDashes{\llap{\color{cyan}\mdseries-{-}-}}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.97,0.97,0.97}
+
+\lstdefinestyle{mystyle}{
+  backgroundcolor=\color{backcolour},   
+  commentstyle=\color{codegreen},
+  keywordstyle=\color{magenta},
+  numberstyle=\tiny\color{codegray},
+  stringstyle=\color{codepurple},
+  basicstyle=\ttfamily,
+  breakatwhitespace=false,
+  breaklines=true,
+  captionpos=t, % キャプテンの位置
+  frame={tb},
+  %frame={tblr},
+  keepspaces=true,
+  numbers=left,
+  numbersep=5pt,
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  tabsize=2,
+  columns=fixed,
+  basewidth=0.5em,
+}
+
+\lstset{style=mystyle}
+% ---===---===---===---
+
+%\DeclareFontShape{JT1}{hmc}{b}{n}{<->ssub*hmc/bx/n}{}
+%\DeclareFontShape{JY1}{hmc}{b}{n}{<->ssub*hmc/bx/n}{}
+
+% ===============================================
+% page format
+%  textwidth  = paperwidth(210mm) - oddsidemargin(13mm) - evensidemargin(13mm)
+%  textheight = paperheight(297mm) - topmargin(20mm - header分) - bottommargin(18mm)
+% ===============================================
+
+\setlength{\paperwidth}{210mm}
+\setlength{\textwidth}{\paperwidth}
+\addtolength{\textwidth}{-13mm} % oddside margin
+\addtolength{\textwidth}{-13mm} % evenside margin
+\setlength{\oddsidemargin}{-1in}
+\addtolength{\oddsidemargin}{13mm} % ここで左右を調節
+
+\setlength{\paperheight}{297mm}
+\setlength{\textheight}{\paperheight}
+\addtolength{\textheight}{-10mm} % 文章領域の高さの調節
+\addtolength{\textheight}{-23truemm}
+\setlength{\topmargin}{-15mm} % ここで上下を調節
+
+\setlength{\headheight}{0in}
+\setlength{\headsep}{0in}
+%\setlength{\columnsep}{10mm}
+
+\pagestyle{plain}
+
+% ===============================================
+% タイトルの書式設定(開始)
+\makeatletter
+\def\@maketitle{
+\begin{center}
+{\Large データサイエンスプログラミング}\\
+\rule{\textwidth}{1mm}
+\end{center}
+\vskip 3.5em
+\begin{center}
+\let\footnote\thanks
+\vspace{-15mm}
+{\LARGE \@title \par}
+\end{center}
+\begin{flushright}
+{\large 提出日： \@date}
+\par\vskip .5em
+{\large 所属： 知能システム科学コース}
+\par\vskip .5em
+{\large 名前： \@author}
+\end{flushright}
+\par\vskip .5em
+}
+\makeatother
+% タイトルの書式設定(終わり)
+% ===============================================
+
+% ここから下を変更する
+\title{Paper(Report) 15}
+%\course{知能システム科学コース}
+\author{織田 康太郎}
+\date{\today}
+
+\fontsize{10.5mm}{0pt}
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Create a program that solves the knapsack problem}
+\begin{table}[hbtp]
+  \centering
+  \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+    \hline
+    No. & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\
+    \hline 
+    weight & 87 & 66 & 70 & 25 & 33 & 24 & 89 & 63 & 23 & 54 \\
+    \hline
+    value & 96 & 55 & 21 & 58 & 41 & 81 & 8 & 99 & 59 & 62 \\
+    \hline
+  \end{tabular}
+\end{table}
+
+\subsubsection*{(1) Program list}
+\lstinputlisting[
+  language=python,
+  caption=newrkp.py,
+]{./sources/newrkp.py}
+
+\vspace{-3mm}
+\subsubsection*{(2) Result}
+\lstinputlisting[
+]{./sources/output.txt}
+
+\end{document}
