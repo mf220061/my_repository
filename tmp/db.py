@@ -110,67 +110,43 @@ def solve(schedule):
             print('可能')
         else:
             print('不可能')
-'''
 S1 = [
-        Sousa("r", "t", "x", 0),
-        Sousa("r", "s", "x", 1),
-        Sousa("r", "u", "x", 2),
-        Sousa("r", "t", "y", 3),
-        Sousa("r", "s", "y", 4),
-        Sousa("w", "u", "x", 5),
-        Sousa("w", "t", "x", 6),
-        Sousa("w", "s", "z", 7)
+        Sousa("r", "t", "x"),
+        Sousa("r", "s", "x"),
+        Sousa("r", "u", "x"),
+        Sousa("r", "t", "y"),
+        Sousa("r", "s", "y"),
+        Sousa("w", "u", "x"),
+        Sousa("w", "t", "x"),
+        Sousa("w", "s", "z")
     ]
 
 S2 = [
-        Sousa("r", "t", "x", 0),
-        Sousa("r", "s", "y", 1),
-        Sousa("r", "u", "z", 2),
-        Sousa("r", "t", "y", 3),
-        Sousa("r", "s", "x", 4),
-        Sousa("r", "u", "y", 5),
-        Sousa("w", "t", "z", 6),
-        Sousa("w", "s", "z", 7),
-        Sousa("w", "u", "z", 8)
+        Sousa("r", "t", "x"),
+        Sousa("r", "s", "y"),
+        Sousa("r", "u", "z"),
+        Sousa("r", "t", "y"),
+        Sousa("r", "s", "x"),
+        Sousa("r", "u", "y"),
+        Sousa("w", "t", "z"),
+        Sousa("w", "s", "z"),
+        Sousa("w", "u", "z")
     ]
 
 S3 = [
-        Sousa("r", "t", "x", 0),
-        Sousa("r", "s", "x", 1),
-        Sousa("r", "u", "x", 2),
-        Sousa("r", "t", "y", 3),
-        Sousa("r", "s", "z", 4),
-        Sousa("w", "t", "y", 5),
-        Sousa("r", "u", "z", 6),
-        Sousa("w", "s", "z", 7),
-        Sousa("w", "t", "z", 8),
-        Sousa("w", "u", "x", 9)
-    ]
-'''
-
-Sousa.position = 0
-S4 = [
-        Sousa("r", "u", "x"),
-        Sousa("w", "t", "y"),
-        Sousa("w", "u", "y")
-    ]
-
-Sousa.position = 0
-S5 = [
         Sousa("r", "t", "x"),
         Sousa("r", "s", "x"),
         Sousa("r", "u", "x"),
         Sousa("r", "t", "y"),
         Sousa("r", "s", "z"),
         Sousa("w", "t", "y"),
-        Sousa("w", "s", "z"),
         Sousa("r", "u", "z"),
+        Sousa("w", "s", "z"),
         Sousa("w", "t", "z"),
         Sousa("w", "u", "x")
     ]
 
-Sousa.position = 0
-S6 = [
+S4 = [
         Sousa('r', 's', 'a'),
         Sousa('r', 's', 'b'),
         Sousa('r', 't', 'a'),
@@ -182,16 +158,8 @@ S6 = [
         Sousa('w', 't', 'a'),
         Sousa('w', 't', 'c')
     ]
-'''
-for s in check_conflict(S2):
-    print_schedule(s)
-'''
-#print_schedule(S2)
-#print_schedule(make_goal(S2))
 
-#solve(S1)
-#solve(S2)
-#solve(S3)
+solve(S1)
+solve(S2)
+solve(S3)
 solve(S4)
-#solve(S5)
-solve(S6)
