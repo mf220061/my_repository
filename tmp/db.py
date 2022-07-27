@@ -110,7 +110,9 @@ def solve(schedule):
             print('可能')
         else:
             print('不可能')
-S1 = [
+
+
+S1 = [ # (1)のスケジュール
         Sousa("r", "t", "x"),
         Sousa("r", "s", "x"),
         Sousa("r", "u", "x"),
@@ -121,7 +123,7 @@ S1 = [
         Sousa("w", "s", "z")
     ]
 
-S2 = [
+S2 = [ # (2)のスケジュール
         Sousa("r", "t", "x"),
         Sousa("r", "s", "y"),
         Sousa("r", "u", "z"),
@@ -133,7 +135,7 @@ S2 = [
         Sousa("w", "u", "z")
     ]
 
-S3 = [
+S3 = [ # (3)のスケジュール
         Sousa("r", "t", "x"),
         Sousa("r", "s", "x"),
         Sousa("r", "u", "x"),
@@ -146,7 +148,7 @@ S3 = [
         Sousa("w", "u", "x")
     ]
 
-S4 = [
+S4 = [ # オリジナルのスケジュール
         Sousa('r', 's', 'a'),
         Sousa('r', 's', 'b'),
         Sousa('r', 't', 'a'),
