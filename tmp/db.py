@@ -6,11 +6,14 @@ import itertools
 # x: 操作の対象となるデータ
 # positionは元の課題に記載されているスケジュールでの位置
 class Sousa:
-    def __init__(self, sousa, transaction, data, position):
+    position = 0
+
+    def __init__(self, sousa, transaction, data):
         self.sousa = sousa
         self.transaction = transaction
         self.data = data
-        self.position = position
+        self.position = Sousa.position
+        Sousa.position += 1
 
 # 描画準備
 def print_sousa(sousa):
@@ -107,7 +110,7 @@ def solve(schedule):
             print('可能')
         else:
             print('不可能')
-
+'''
 S1 = [
         Sousa("r", "t", "x", 0),
         Sousa("r", "s", "x", 1),
@@ -143,24 +146,41 @@ S3 = [
         Sousa("w", "t", "z", 8),
         Sousa("w", "u", "x", 9)
     ]
+'''
 
+Sousa.position = 0
 S4 = [
-        Sousa("r", "u", "x", 0),
-        Sousa("w", "t", "y", 1),
-        Sousa("w", "u", "y", 2)
+        Sousa("r", "u", "x"),
+        Sousa("w", "t", "y"),
+        Sousa("w", "u", "y")
     ]
 
+Sousa.position = 0
 S5 = [
-        Sousa("r", "t", "x", 0),
-        Sousa("r", "s", "x", 1),
-        Sousa("r", "u", "x", 2),
-        Sousa("r", "t", "y", 3),
-        Sousa("r", "s", "z", 4),
-        Sousa("w", "t", "y", 5),
-        Sousa("w", "s", "z", 6),
-        Sousa("r", "u", "z", 7),
-        Sousa("w", "t", "z", 8),
-        Sousa("w", "u", "x", 9)
+        Sousa("r", "t", "x"),
+        Sousa("r", "s", "x"),
+        Sousa("r", "u", "x"),
+        Sousa("r", "t", "y"),
+        Sousa("r", "s", "z"),
+        Sousa("w", "t", "y"),
+        Sousa("w", "s", "z"),
+        Sousa("r", "u", "z"),
+        Sousa("w", "t", "z"),
+        Sousa("w", "u", "x")
+    ]
+
+Sousa.position = 0
+S6 = [
+        Sousa('r', 's', 'a'),
+        Sousa('r', 's', 'b'),
+        Sousa('r', 't', 'a'),
+        Sousa('r', 't', 'c'),
+        Sousa('w', 's', 'b'),
+        Sousa('r', 'u', 'b'),
+        Sousa('r', 'u', 'c'),
+        Sousa('w', 'u', 'b'),
+        Sousa('w', 't', 'a'),
+        Sousa('w', 't', 'c')
     ]
 '''
 for s in check_conflict(S2):
@@ -173,4 +193,5 @@ for s in check_conflict(S2):
 #solve(S2)
 #solve(S3)
 solve(S4)
-solve(S5)
+#solve(S5)
+solve(S6)
