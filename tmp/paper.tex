@@ -116,7 +116,7 @@
 \makeatletter
 \def\@maketitle{
 \begin{center}
-{\Large データサイエンスプログラミング}\\
+{\Large データベース論}\\
 \rule{\textwidth}{1mm}
 \end{center}
 \vskip 3.5em
@@ -139,7 +139,7 @@
 % ===============================================
 
 % ここから下を変更する
-\title{Paper(Report) 15}
+\title{演習課題3}
 %\course{知能システム科学コース}
 \author{織田 康太郎}
 \date{\today}
@@ -150,25 +150,22 @@
 
 \maketitle
 
-\subsection*{Create a program that solves the knapsack problem}
-\begin{table}[hbtp]
-  \centering
-  \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
-    \hline
-    No. & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\
-    \hline 
-    weight & 87 & 66 & 70 & 25 & 33 & 24 & 89 & 63 & 23 & 54 \\
-    \hline
-    value & 96 & 55 & 21 & 58 & 41 & 81 & 8 & 99 & 59 & 62 \\
-    \hline
-  \end{tabular}
-\end{table}
+\subsection*{1. トランザクションT、S、Uに対して、以下のスケジュールで実行されたとする。これらのスケジュールが競合直列化可能か否か判定せよ。}
 
-\subsubsection*{(1) Program list}
+\subsubsection*{(1) $R_{T}(x)R_{S}(x)R_{U}(x)R_{T}(y)R_{S}(y)W_{U}(x)W_{T}(x)W_{S}(z)$}
+\subsubsection*{(2) $R_{T}(x)R_{S}(y)R_{U}(z)R_{T}(y)R_{S}(x)R_{U}(y)W_{T}(z)W_{S}(z)W_{U}(z)$}
+\subsubsection*{(3) $R_{T}(x)R_{S}(x)R_{U}(x)R_{T}(y)R_{S}(z)W_{T}(y)R_{U}(z)W_{S}(z)W_{T}(z)W_{U}(x)$}
+
+\par 以下に示す\verb|db3.py|を用いてスケジュールが競合直列化可能であるかの判定を行った。
+\par また、競合直列化可能か正しく判定できているかを確認するために、オリジナルのスケジュールを作成して、それについても判定を行った。
+
+\par オリジナルのスケジュール
+\par $R_{S}(x)R_{S}(y)R_{T}(x)R_{T}(z)W_{S}(y)R_{U}(y)R_{U}(z)W_{U}(y)W_{T}(x)W_{T}(z)$
+
 \lstinputlisting[
   language=python,
-  caption=newrkp.py,
-]{./sources/newrkp.py}
+  caption=db3.py,
+]{./sources/db3.py}
 
 \vspace{-3mm}
 \subsubsection*{(2) Result}
