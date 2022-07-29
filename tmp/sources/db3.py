@@ -77,6 +77,7 @@ def make_goal(schedule):
 
 # スケジュールを構成するデータベースに対する操作を並べ替えて、
 # 新たなスケジュールを構築する。
+# 並べ替えには、リストの全ての並びを生成する itertools.permutations を使用する。
 # そのとき、操作の順番が入れ替わっているものについては、競合を確認する。
 # 全ての操作について競合しないスケジュールを返す。
 def search_schedule(schedule, nconflicts):
